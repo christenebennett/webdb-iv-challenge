@@ -9,6 +9,7 @@ recipes
   "id": 1, 
   "name": "shredded beef tacos", 
   "dish_id": 1
+  "instructions": "cook it"
   "ingredients": [
     {
       ingredient_id: 1
@@ -26,3 +27,25 @@ recipes
       qty: 1
     }
   ] }
+
+  tables: 
+  dish  
+    id  
+    name
+  
+  recipes 
+    id
+    name
+    dish id
+    ingredients
+    qty
+
+  
+  ingredients
+    id
+    name
+    qty
+    recipe 
+
+
+  
