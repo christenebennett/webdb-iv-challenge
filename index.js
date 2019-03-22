@@ -50,9 +50,14 @@ const db = require('./data/dbHelpers');
 //   })
 //   .catch(error => console.log(error));
 
-db.getRecipeIngredients(1)
-  .then(ingredients => {
-    console.log('ingredients', ingredients)
-  })
-  .catch(error => console.log(error));
+// db.getRecipeIngredients(1)
+//   .then(ingredients => {
+//     console.log('ingredients', ingredients)
+//   })
+//   .catch(error => console.log(error));
 
+// db.getIngredients()
+//   .then(ingredients => {
+//     console.log('ingredients', ingredients)
+//   })
+//   .catch(error => console.log(error))

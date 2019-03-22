@@ -10,10 +10,10 @@ module.exports = {
   getDish,
   getRecipes,
   addRecipe,
-  findRecipeIngredients,
   addIngredient,
   addRecipeIngredient,
-  getRecipeIngredients
+  getRecipeIngredients,
+  getIngredients
 }
   // getDishes(): should return a list of all dishes in the database.
   function getDishes() {
@@ -44,13 +44,6 @@ function addRecipe(recipe) {
     .then(ids => ({id: ids[0]}));
 }
 
-// find all ingredients for given recipe id
-function findRecipeIngredients(recipeId) {
-  return db.select('recipe_id', 'ingredient_id')
-    .from('recipeIngredients')
-    .where({recipe_id: recipeId})
-}
-
 // add ingredients
 function addIngredient(ingredient) {
   return db('ingredients')
@@ -67,9 +60,14 @@ function addRecipeIngredient(ingredient) {
 
 // list recipe ingredients
 function getRecipeIngredients(recipeId) {
-  return db.select('recipes.recipe_name', 'ingredients.ingredient_name')
-    .from('recipes')
-    // .where({id: Number(recipeId)})
-    .innerJoin('recipeIngredients', 'recipes.id', 'recipeIngredients.recipe_id')
-    .innerJoin('ingredients', 'ingredients.id', 'recipeIngredients.ingredient_id')
+  return db.select('ingredients.ingredient_name', 'recipeIngredients.qty' )
+    .from('ingredients')
+    .where({recipe_id: recipeId})
+    .innerJoin('recipeIngredients', 'recipeIngredients.ingredient_id', 'ingredients.id')
+    .orderBy('ingredient_name')
+}
+
+// list all available ingredients
+function getIngredients() {
+  return db('ingredients');
 }
