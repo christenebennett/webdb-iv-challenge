@@ -32,12 +32,6 @@ const db = require('./data/dbHelpers');
 //   })
 //   .catch (error => console.log(error));
 
-// db.findRecipeIngredients(1)
-//   .then(ingredients => {
-//     console.log('ingredients', ingredients);
-//   })
-//   .catch(error => console.log(error))
-
 // db.addIngredient({ingredient_name: 'shredded beef'})
 //   .then(ingredient => {
 //     console.log('added ingredient', ingredient);
