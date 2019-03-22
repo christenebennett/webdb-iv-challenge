@@ -1,0 +1,73 @@
+const knex = require('knex');
+
+const dbConfig = require('../knexfile');
+
+const db = knex(dbConfig.development);
+
+module.exports = {
+  getDishes,
+  addDish,
+  getDish,
+  getRecipes,
+  addRecipe,
+  addIngredient,
+  addRecipeIngredient,
+  getRecipeIngredients,
+  getIngredients
+}
+  // getDishes(): should return a list of all dishes in the database.
+  function getDishes() {
+    return db('dishes');
+  }
+
+// addDish(dish): should add the dish to the database and return the id of the new dish.
+  function addDish(dish) {
+    return db('dishes')
+      .insert(dish)
+      .then(ids => ({id: ids[0]}));
+  }
+
+// getDish(id): should return the dish with the provided id and include a list of the related recipes.
+function getDish(id) {
+  return db('dishes')
+    .where({id: Number(id)})
+}
+// getRecipes(): should return a list of all recipes in the database including the dish they belong to.
+function getRecipes() {
+  return db('recipes');
+}
+
+// addRecipe(recipe): should add a recipe to the database and return the id of the new recipe.
+function addRecipe(recipe) {
+  return db('recipes')
+    .insert(recipe)
+    .then(ids => ({id: ids[0]}));
+}
+
+// add ingredients
+function addIngredient(ingredient) {
+  return db('ingredients')
+    .insert(ingredient)
+    .then(ids => ({id: ids[0]}));
+}
+
+// add ingredient to recipe
+function addRecipeIngredient(ingredient) {
+  return db('recipeIngredients')
+    .insert(ingredient)
+    .then(ids => ({id: ids[0]}));
+}
+
+// list recipe ingredients
+function getRecipeIngredients(recipeId) {
+  return db.select('ingredients.ingredient_name', 'recipeIngredients.qty' )
+    .from('ingredients')
+    .where({recipe_id: recipeId})
+    .innerJoin('recipeIngredients', 'recipeIngredients.ingredient_id', 'ingredients.id')
+    .orderBy('ingredient_name')
+}
+
+// list all available ingredients
+function getIngredients() {
+  return db('ingredients');
+}
