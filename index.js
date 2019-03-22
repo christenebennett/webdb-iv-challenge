@@ -31,3 +31,28 @@ const db = require('./data/dbHelpers');
 //     console.log('new recipe', recipe)
 //   })
 //   .catch (error => console.log(error));
+
+// db.findRecipeIngredients(1)
+//   .then(ingredients => {
+//     console.log('ingredients', ingredients);
+//   })
+//   .catch(error => console.log(error))
+
+// db.addIngredient({ingredient_name: 'shredded beef'})
+//   .then(ingredient => {
+//     console.log('added ingredient', ingredient);
+//   })
+//   .catch(error => console.log(error));
+
+// db.addRecipeIngredient({recipe_id: 1, ingredient_id: 4, qty: 2})
+//   .then(ingredient => {
+//     console.log('added ingredient', ingredient);
+//   })
+//   .catch(error => console.log(error));
+
+db.getRecipeIngredients(1)
+  .then(ingredients => {
+    console.log('ingredients', ingredients)
+  })
+  .catch(error => console.log(error));
+

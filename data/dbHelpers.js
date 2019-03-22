@@ -9,7 +9,11 @@ module.exports = {
   addDish,
   getDish,
   getRecipes,
-  addRecipe
+  addRecipe,
+  findRecipeIngredients,
+  addIngredient,
+  addRecipeIngredient,
+  getRecipeIngredients
 }
   // getDishes(): should return a list of all dishes in the database.
   function getDishes() {
@@ -38,4 +42,34 @@ function addRecipe(recipe) {
   return db('recipes')
     .insert(recipe)
     .then(ids => ({id: ids[0]}));
+}
+
+// find all ingredients for given recipe id
+function findRecipeIngredients(recipeId) {
+  return db.select('recipe_id', 'ingredient_id')
+    .from('recipeIngredients')
+    .where({recipe_id: recipeId})
+}
+
+// add ingredients
+function addIngredient(ingredient) {
+  return db('ingredients')
+    .insert(ingredient)
+    .then(ids => ({id: ids[0]}));
+}
+
+// add ingredient to recipe
+function addRecipeIngredient(ingredient) {
+  return db('recipeIngredients')
+    .insert(ingredient)
+    .then(ids => ({id: ids[0]}));
+}
+
+// list recipe ingredients
+function getRecipeIngredients(recipeId) {
+  return db.select('recipes.recipe_name', 'ingredients.ingredient_name')
+    .from('recipes')
+    // .where({id: Number(recipeId)})
+    .innerJoin('recipeIngredients', 'recipes.id', 'recipeIngredients.recipe_id')
+    .innerJoin('ingredients', 'ingredients.id', 'recipeIngredients.ingredient_id')
 }
