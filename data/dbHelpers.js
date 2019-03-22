@@ -7,7 +7,9 @@ const db = knex(dbConfig.development);
 module.exports = {
   getDishes,
   addDish,
-  getDish
+  getDish,
+  getRecipes,
+  addRecipe
 }
   // getDishes(): should return a list of all dishes in the database.
   function getDishes() {
@@ -27,5 +29,13 @@ function getDish(id) {
     .where({id: Number(id)})
 }
 // getRecipes(): should return a list of all recipes in the database including the dish they belong to.
-// addRecipe(recipe): should add a recipe to the database and return the id of the new recipe.
+function getRecipes() {
+  return db('recipes');
+}
 
+// addRecipe(recipe): should add a recipe to the database and return the id of the new recipe.
+function addRecipe(recipe) {
+  return db('recipes')
+    .insert(recipe)
+    .then(ids => ({id: ids[0]}));
+}

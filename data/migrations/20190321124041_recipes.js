@@ -12,6 +12,8 @@ exports.up = function(knex, Promise) {
       .inTable('dishes')
       .onDelete('CASCADE')
       .onUpdate('CASCADE');
+    tbl.text('instructions')
+      .notNullable();
     })
 };
 
