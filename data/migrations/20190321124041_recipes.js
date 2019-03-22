@@ -12,16 +12,6 @@ exports.up = function(knex, Promise) {
       .inTable('dishes')
       .onDelete('CASCADE')
       .onUpdate('CASCADE');
-    tbl.integer('ingredient_id')
-      .notNullable()
-      .unsigned()
-      .references('id')
-      .inTable('ingredients')
-      .onDelete('CASCADE')
-      .onUpdate('CASCADE');
-    tbl.integer('recipe_ingredient_qty')
-      .notNullable()
-      .unsigned()
     })
 };
 

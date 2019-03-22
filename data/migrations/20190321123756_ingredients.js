@@ -5,8 +5,6 @@ exports.up = function(knex, Promise) {
     tbl.string('ingredient_name')
       .notNullable()
       .unique();
-    tbl.integer('ingredient_qty')
-      .notNullable();
   })
 };
 
